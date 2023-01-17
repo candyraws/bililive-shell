@@ -16,7 +16,7 @@ elif [ "$(echo -n "${blive_room_id}" | grep -o "[[:digit:]]" | wc -l)" != ${#bli
 fi
 
 while :; do
-    blive_api_back=$(curl -s6 --retry 2 --retry-delay 3 --connect-timeout 10 -A "${ua_setting}" "${blive_api}")
+    blive_api_back=$(curl -s --retry 2 --retry-delay 3 --connect-timeout 10 -A "${ua_setting}" "${blive_api}")
     curl_status_code=$?
     blive_status=$(echo "${blive_api_back}" | jq -r '.data.live_status')
     if [ "${blive_status}" == "1" ]; then
