@@ -56,7 +56,7 @@ for %a in ("*.flv") do ffmpeg -i "%a" -c copy -f mp4 "%~na.mp4"
 Linux
 
 ```bash
-for i in $(ls *.flv);do ffmpeg -i ${i} -c copy -f mp4 ${i%.flv}.mp4;done
+for i in $(ls *.flv);do ffmpeg -i "${i}" -c copy -f mp4 "${i%.flv}.mp4";done
 ```
 
 支持H.265编码的直播录制工具会放在另一个项目，主要使用ffmpeg录制
