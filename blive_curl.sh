@@ -20,8 +20,8 @@ while :; do
     curl_status_code=$?
     blive_status=$(echo "${blive_api_back}" | jq -r '.data.live_status')
     if [ "${blive_status}" == "1" ]; then
-        blive_direct_url=$(echo "${blive_api_back}" | jq -jr '.data.playurl_info.playurl.stream[].format[] | select(.format_name=="flv").codec[]|.url_info[].host,.base_url,.url_info[].extra')
-        blive_ttl=$(echo "${blive_api_back}" | jq -r '.data.playurl_info.playurl.stream[].format[] | select(.format_name=="flv").codec[].url_info[].stream_ttl')
+        blive_direct_url=$(echo "${blive_api_back}" | jq -jr '.data.playurl_info.playurl.stream[].format[] | select(.format_name=="flv").codec[]|.url_info[0].host,.base_url,.url_info[0].extra')
+        blive_ttl=$(echo "${blive_api_back}" | jq -r '.data.playurl_info.playurl.stream[].format[] | select(.format_name=="flv").codec[].url_info[0].stream_ttl')
         echo "$(date +%Y%m%d_%H%M%S): 直播中，拉起curl，开始录制，预期直播ttl: ${blive_ttl}"
         blive_output_name="$(date +%Y%m%d_%H%M%S)_${blive_room_id}.flv"
         curl -A "${ua_setting}" -e "https://live.bilibili.com/" "${blive_direct_url}" -o "${blive_output_name}"
